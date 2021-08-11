@@ -1,4 +1,4 @@
-package com.formacionbdi.microservicios.app.examenes.models.entity;
+package com.formacionbdi.microservicios.commons.examenes.models.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="examenes")
 public class Examen {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -88,7 +89,21 @@ public class Examen {
 		this.preguntas.remove(pregunta);
 		pregunta.setExamen(null);
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if(this == obj) {
+			return true;
+		}
+			
+		if(!(obj instanceof Examen)) {
+			return false;
+		}
+		
+		Examen e = (Examen) obj;
+		
+		return this.id != null && this.id.equals(e.getId());
+	}
 	
 }
